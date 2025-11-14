@@ -1,0 +1,86 @@
+{{!-- Citation for the following code:
+Date: 11/06/2025
+Adapted from:
+Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+
+<h1>Formats</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each formats.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the format id, category, and royalty percentage }}
+        {{#each formats}}
+        <tr>
+            <td>{{this.formatID}}</td>
+            <td>{{this.category}}</td>
+            <td>{{this.royaltyPercentage}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_format_form'>
+                <input type='hidden' name='delete_format_id' value='{{this.formatID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Format</h2>
+<form class='formatForm' id='create_format_form'>
+    <label for='create_format_category'>Category: </label>
+    <select name='create_format_category' id='create_format_category' required>
+        <option value='Paperback' selected>Paperback</option>
+        <option value='Hardcover'>Hardcover</option>
+        <option value='Ebook'>Ebook</option>
+        <option value='Audiobook'>Audiobook</option>
+    </select>
+    <label for='create_format_royalty_percentage'>Royalty Percentage: </label>
+     <select name='create_format_royalty_percentage' id='create_format_royalty_percentage' required>
+        <option value='7.50' selected>7.50%</option>
+        <option value='12.25'>12.25%</option>
+        <option value='20.50'>20.50%</option>
+        <option value='15.00'>15.00%</option>
+
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Format</h2>
+<form class='formatForm' id='update_format_form'>
+    <label for='update_format_id'>Format to Update: </label>
+    <select name='update_format_id' id='update_format_id' required>
+        <option value='' disabled selected>Select a Format</option>
+        {{#each formats}}
+        <option value='{{this.formatID}}' required>
+            {{this.formatID}} 
+            -
+            {{this.category}}
+          
+        </option>
+        {{/each}}
+    </select>
+    {{!do not want changes to category, set only allow changes to percentages}}
+    <label for='update_format_royalty_percentage'>Royalty Percentage: </label>
+    <input type='number' name='update_format_royalty_percentage' id='update_format_royalty_percentage' step="0.01"/>
+     
+    <input type='submit' />
+</form>

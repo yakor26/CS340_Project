@@ -1,0 +1,76 @@
+{{!-- Citation for the following code:
+Date: 11/06/2025
+Adapted from:
+Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+
+
+<h1>Book Formats</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each booksformats.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row }}
+        {{#each booksformats}}
+        <tr>
+            <td>{{this.bookID}}</td>
+            <td>{{this.formatID}}</td>
+            <td>{{this.price}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_books_formats_form'>
+                <input type='hidden' name='delete_books_id' value='{{this.bookID}}' />
+                <input type='hidden' name='delete_formats_id' value='{{this.formatID}}' />
+
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{! UPDATE form }}
+{{!-- placeholder update --}}
+<h2>Update Book Formats</h2>
+<form class='books_formatsForm' id='update_books_formats_form'>
+    <label for='update_books_id'>Book to Update: </label>
+    <select name='update_books_id' id='update_books_formats_id' required>
+        <option value='' disabled selected>Select Books/Formats</option>
+        {{#each booksformats}}
+        <option value='{{this.bookID}}' required>
+            {{this.bookID}} 
+        </option>
+        {{/each}}
+    </select>
+
+     <select name='update_books_formats_id' id='update_books_formats_id' required>
+        <option value='' disabled selected>Select Books/Formats</option>
+        {{#each booksformats}}
+        <option value='{{this.formatID}}' required>
+            {{this.formatID}} 
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_books_formats_price'>Price: </label>
+    <input type='number' name='update_books_formats_price' id='update_books_formats_price' step="0.01" />
+
+     
+    <input type='submit' />
+</form>

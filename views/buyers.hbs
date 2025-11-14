@@ -1,0 +1,93 @@
+{{!-- Citation for the following code:
+Date: 11/05/2025
+Adapted from:
+Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+
+
+<h1>Buyers</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each buyers.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the buyer id, name, email, organization buyer }}
+        {{#each buyers}}
+        <tr>
+            <td>{{this.buyerID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.organizationBuyer}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_buyer_form'>
+                <input type='hidden' name='delete_buyer_id' value='{{this.buyerID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Buyer</h2>
+<form class='buyerForm' id='create_buyer_form'>
+    <label for='create_buyer_name'>Name: </label>
+    <input type='text' name='create_buyer_name' id='create_buyer_name' required />
+
+    <label for='create_buyer_email'>Email: </label>
+    <input type='text' name='create_buyer_email' id='create_buyer_email' />
+
+    <label for='create_buyer_organization_buyer'>Organization Buyer: </label>
+     <select name='create_buyer_organization_buyer' id='create_buyer_organization_buyer'>
+        <option value='true' selected>True</option>
+        <option value='false'>False</option>
+    </select>
+
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Buyer</h2>
+<form class='buyerForm' id='update_buyer_form'>
+    <label for='update_buyer_id'>Buyer to Update: </label>
+    <select name='update_buyer_id' id='update_buyer_id' required>
+        <option value='' disabled selected>Select a Buyer</option>
+        {{#each buyers}}
+        <option value='{{this.buyerID}}' required>
+            {{this.buyerID}} 
+            -
+            {{this.name}}
+          
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_buyer_email'>Email: </label>
+    <input type='text' name='update_buyer_email' id='update_buyer_email' />
+
+    <label for='update_buyer_organization_buyer'>Organization Buyer: </label>
+     <select name='update_buyer_organization_buyer' id='update_buyer_organization_buyer'>
+        <option value='true' selected>True</option>
+        <option value='false'>False</option>
+    </select>
+    
+
+    
+     
+    <input type='submit' />
+</form>

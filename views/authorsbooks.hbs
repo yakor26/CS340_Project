@@ -1,0 +1,73 @@
+{{!-- Citation for the following code:
+Date: 11/05/2025
+Adapted from:
+Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+
+<h1>Authors Books</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each authorsbooks.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the author id, book id}}
+        {{#each authorsbooks}}
+        <tr>
+            <td>{{this.authorID}}</td>
+            <td>{{this.bookID}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_author_books_form'>
+                <input type='hidden' name='delete_author_book_id' value='{{this.authorID}}' />
+                <input type='hidden' name='delete_book_author_id' value='{{this.bookID}}'/>
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+{{! UPDATE form }}
+<h2>Update an Author/Book</h2>
+<form class='authorBookForm' id='update_author_book_form'>
+    <label for='update_author_id'>Author to Update: </label>
+    <select name='update_author_id' id='update_author_id' required>
+        <option value='' disabled selected>Select an Author ID</option>
+        {{!-- temporary placeholder --}}
+        {{#each authorsbooks}}
+        <option value='{{this.authorID}}' required>
+            {{this.authorID}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_book_id'> Book to Update: </label>
+    <select name='update_book_id' id='update_book_id' required>
+     <option value='' disabled selected>Select an Book ID</option>
+        {{!-- temporary placeholder --}}
+        {{#each authorsbooks}}
+        <option value='{{this.bookID}}' required>
+            {{this.bookID}}
+        </option>
+        {{/each}}
+    </select>
+
+
+     
+    <input type='submit' />
+</form>
