@@ -20,12 +20,14 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     </thead>
 
     <tbody>
-        {{! For each row, print the author id, book id}}
+        {{! For each row, print the order id, book id, quantity}}
         {{#each booksorders}}
         <tr>
             <td>{{this.orderID}}</td>
             <td>{{this.bookID}}</td>
+            <td>{{this.quantity}}</td>
 
+            
             {{! DELETE form }}
             <form id='delete_books_orders_form'>
                 <input type='hidden' name='delete_order_id' value='{{this.orderID}}' />
@@ -66,6 +68,9 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         </option>
         {{/each}}
     </select>
+
+    <label for='update_book_quantity'> Quantity to Update: </label>
+    <select name='update_book_quantity' id='update_book_quantity' required>
 
 
      
