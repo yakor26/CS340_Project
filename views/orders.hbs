@@ -1,0 +1,92 @@
+{{!-- Citation for the following code:
+Date: 11/05/2025
+Adapted from:
+Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+
+<h1>Orders</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each orders.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the order id, buyer id, orderDate }}
+        {{#each orders}}
+        <tr>
+            <td>{{this.orderID}}</td>
+            <td>{{this.buyerID}}</td>
+            <td>{{this.orderDate}}</td>
+            
+            {{! DELETE form }}
+            <form id='delete_order_form'>
+                <input type='hidden' name='delete_order_id' value='{{this.orderID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+
+    {{!-- # Citation for use of AI Tools for Create an Order:
+2      # Date: 11/06/2025
+3      # Prompts to determine how to enter foreign key information
+4      # "I have a fk buyer id, would I allow it to be manually entered?"
+       # included snippet of code
+7      # AI Source URL: https://copilot.microsoft.com/ --}}
+<h2>Create an Order</h2>
+<form class='orderForm' id='create_order_form'>
+    {{!reference all available buyers to select from}}
+    <label for='create_order_buyer'>Buyer: </label>
+    <select name='create_order_buyer' id='create_order_buyer' required>
+        <option value='' disabled selected>Select a Buyer</option>
+        {{#each buyers}}
+        <option value='{{this.buyerID}}' required>
+            {{this.buyerID}}
+            -
+            {{this.firstName}}, {{this.lastName}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='create_order_date'>Order Date: </label>
+    <input type='date' name='create_order_date' id='create_order_date'required/>
+
+    
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update an Order</h2>
+<form class='orderForm' id='update_order_form'>
+    <label for='update_order_id'>Order to Update: </label>
+    <select name='update_order_id' id='update_order_id' required>
+        <option value='' disabled selected>Select an Order</option>
+        {{#each orders}}
+        <option value='{{this.orderID}}' required>
+            {{this.orderID}}
+            -
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_order_date'>Order Date: </label>
+    <input type='date' name='update_order_date' id='update_order_date' />
+     
+    <input type='submit' />
+</form>

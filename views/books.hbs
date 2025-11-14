@@ -1,0 +1,92 @@
+{{!-- Citation for the following code:
+Date: 11/05/2025
+Adapted from:
+Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+
+<h1>Books</h1>
+
+{{! READ table }}
+<table>
+    <thead>
+        {{! For the table header row, we print the DB attribute names }}
+        <tr>
+            {{#each books.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{! For each row, print the author id, first name, last name, email }}
+        {{#each books}}
+        <tr>
+            <td>{{this.bookID}}</td>
+            <td>{{this.title}}</td>
+            <td>{{this.pageCount}}</td>
+            <td>{{this.publishDate}}</td>
+            <td>{{this.advanceAmount}}</td>
+
+            {{! DELETE form }}
+            <form id='delete_book_form'>
+                <input type='hidden' name='delete_book_id' value='{{this.bookID}}' />
+                <td>
+                    <button type='submit'>
+                        Delete
+                    </button>
+                </td>
+            </form>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{! CREATE form }}
+<h2>Create a Book</h2>
+<form class='bookForm' id='create_book_form'>
+    <label for='create_book_title'>Title: </label>
+    <input type='text' name='create_book_title' id='create_book_title' required />
+
+    <label for='create_book_page_count'>Page Count: </label>
+    <input type='number' name='create_book_page_count' id='create_book_page_count' />
+
+    <label for='create_book_publish_date'>Publish Date: </label>
+    <input type='date' name='create_book_publish_date' id='create_book_publish_date' />
+
+    <label for='create_book_advance_amount'>Advance Amount: </label>
+    <input type='number' name='create_book_advance_amount' id='create_book_advance_amount' />
+
+    
+    <input type='submit' />
+</form>
+
+{{! UPDATE form }}
+<h2>Update a Book</h2>
+<form class='bookForm' id='update_book_form'>
+    <label for='update_book_id'>Book to Update: </label>
+    <select name='update_book_id' id='update_book_id' required>
+        <option value='' disabled selected>Select a Book</option>
+        {{#each books}}
+        <option value='{{this.bookID}}' required>
+            {{this.bookID}}
+            -
+            {{this.title}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_book_page_count'>Page Count: </label>
+    <input type='number' name='update_book_page_count' id='update_book_page_count' />
+
+    <label for='update_book_publish_date'>Publish Date: </label>
+    <input type='date' name='update_book_publish_date' id='update_book_publish_date' />
+
+    <label for='update_book_advance_amount'>Advance Amount: </label>
+    <input type='number' name='update_book_advance_amount' id='update_book_advance_amount' />
+
+    
+     
+    <input type='submit' />
+</form>
