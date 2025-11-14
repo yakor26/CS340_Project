@@ -108,7 +108,7 @@ app.get('/orders', async function (req, res) {
     try {
         // submit query, store results
         // added buyer query
-        const query9 = 'SELECT buyerID, firstName, lastName FROM Buyers';
+        const query9 = 'SELECT buyerID, name FROM Buyers';
         const query5 = 'SELECT * FROM Orders';
         // query results
         const [buyers] = await db.query(query9);
