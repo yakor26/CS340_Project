@@ -15,7 +15,6 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 </head>
 <body>
     <nav>
-        Navigation: 
         <a href="/">Home</a>
         <a href="/books">Books</a>
         <a href="/authors">Authors</a>
@@ -26,8 +25,14 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         <a href="/booksorders">Book Orders</a>
         <a href="/booksformats">Book Formats</a>
     </nav>
-
+    {{!-- # Citation for use of AI Tools for assistance understanding assigning with Handlebars:
+2      # Date: 11/14/2025
+3      # Prompts to determine how to assign main part of page to a section if not yet defined
+4      # "How to assign main section into a div container if body changes on each page, handlebars?"
+7      # AI Source URL: https://copilot.microsoft.com/ --}}
+    <div class="mainsection">
     {{{body}}}
+    </div>
 
 </body>
 </html>
