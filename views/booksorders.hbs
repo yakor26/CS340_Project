@@ -16,6 +16,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             </th>
             {{/each}}
             <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -27,6 +28,12 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.bookID}}</td>
             <td>{{this.quantity}}</td>
 
+            {{! UPDATE form }}
+            <form class='bookOrderForm' id='update_book_order_form'>
+                <td>
+                    <button type="submit">Edit</button>
+                </td>
+            </form>
             
             {{! DELETE form }}
             <form id='delete_books_orders_form'>
@@ -45,34 +52,35 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 
 {{! UPDATE form }}
-<h2>Update an Order/Book</h2>
+{{!-- <h2>Update an Order/Book</h2>
 <form class='orderBookForm' id='update_order_book_form'>
     <label for='update_order_id'>Order to Update: </label>
     <select name='update_order_id' id='update_order_id' required>
-        <option value='' disabled selected>Select an Order ID</option>
+        <option value='' disabled selected>Select an Order ID</option> --}}
         {{!-- temporary placeholder --}}
-        {{#each booksorders}}
+        {{!-- {{#each booksorders}}
         <option value='{{this.orderID}}' required>
             {{this.orderID}}
         </option>
         {{/each}}
-    </select>
+    </select> --}}
 
-    <label for='update_book_id'> Book to Update: </label>
+    {{!-- <label for='update_book_id'> Book to Update: </label>
     <select name='update_book_id' id='update_book_id' required>
-     <option value='' disabled selected>Select an Book ID</option>
+     <option value='' disabled selected>Select an Book ID</option> --}}
         {{!-- temporary placeholder --}}
-        {{#each booksorders}}
+        {{!-- {{#each booksorders}}
         <option value='{{this.bookID}}' required>
             {{this.bookID}}
         </option>
         {{/each}}
-    </select>
+    </select> --}}
 
-    <label for='update_book_quantity'> Quantity to Update: </label>
+{{!-- edit to include prefilled information --}}
+    {{!-- <label for='update_book_quantity'> Quantity to Update: </label>
     <select name='update_book_quantity' id='update_book_quantity' required>
 
 
      
     <input type='submit' />
-</form>
+</form> --}}

@@ -16,6 +16,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             </th>
             {{/each}}
             <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -54,9 +55,9 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 <form class='authorBookForm' id='update_author_book_form'>
     <label for='update_author_id'>Author to Update: </label>
     <select name='update_author_id' id='update_author_id' required>
-        <option value='' disabled selected>Select an Author ID</option>
+        <option value='' disabled selected>Select an Author ID</option> --}}
         {{!-- temporary placeholder --}}
-        {{#each authorsbooks}}
+        {{!-- {{#each authorsbooks}}
         <option value='{{this.authorID}}' required>
             {{this.authorID}}
         </option>
@@ -65,9 +66,9 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
     <label for='update_book_id'> Book to Update: </label>
     <select name='update_book_id' id='update_book_id' required>
-     <option value='' disabled selected>Select an Book ID</option>
+     <option value='' disabled selected>Select an Book ID</option> --}}
         {{!-- temporary placeholder --}}
-        {{#each authorsbooks}}
+        {{!-- {{#each authorsbooks}}
         <option value='{{this.bookID}}' required>
             {{this.bookID}}
         </option>
@@ -76,5 +77,5 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 
      
-    <input type='submit' /> --}}
-{{!-- </form> --}}
+    <input type='submit' /> 
+</form> --}}

@@ -17,6 +17,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             </th>
             {{/each}}
             <th></th>
+            <th></th>
         </tr>
     </thead>
 
@@ -27,6 +28,13 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.bookID}}</td>
             <td>{{this.formatID}}</td>
             <td>{{this.price}}</td>
+
+            {{! UPDATE form }}
+            <form class='authorBookFormatForm' id='update_book_format_form'>
+                <td>
+                    <button type="submit">Edit</button>
+                </td>
+            </form>
 
             {{! DELETE form }}
             <form id='delete_books_formats_form'>
@@ -47,7 +55,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! UPDATE form }}
 {{!-- placeholder update --}}
-<h2>Update Book Formats</h2>
+{{!-- <h2>Update Book Formats</h2>
 <form class='books_formatsForm' id='update_books_formats_form'>
     <label for='update_books_id'>Book to Update: </label>
     <select name='update_books_id' id='update_books_formats_id' required>
@@ -73,4 +81,4 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
      
     <input type='submit' />
-</form>
+</form> --}}
