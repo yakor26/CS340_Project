@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS Orders (
   orderID INT NOT NULL AUTO_INCREMENT,
   buyerID INT NOT NULL,
   orderDate DATE NOT NULL,
-  PRIMARY KEY (orderID, buyerID),
+  PRIMARY KEY (orderID),
   INDEX fk_Orders_Buyers1_idx (buyerID ASC),
   CONSTRAINT fk_Orders_Buyers1
     FOREIGN KEY (buyerID)
