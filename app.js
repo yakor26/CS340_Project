@@ -176,7 +176,7 @@ app.get('/booksformats', async function (req, res) {
 // Date: 11/20/2025
 // Adapted from: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25645149
 
-// Create Routes
+// *************** CREATE SECTION Routes *************** //
 
 // create route for Books
 app.post('/books/create', async function (req, res) {
@@ -246,7 +246,9 @@ app.post('/authors/create', async function (req, res) {
 });
 
 
-//// DELETE SECTION ////
+//// ******************* DELETE SECTION ******************* ////
+
+// delete book
 app.post('/books/delete', async function (req, res) {
     try {
         // grab info
@@ -268,8 +270,39 @@ app.post('/books/delete', async function (req, res) {
         );
     }
 });
+// Authors Delete Section
+app.post('/authors/delete', async function (req, res) {
+    try {
+        // grab info
+        let data = req.body;
+        // call query
+        const query2 = `CALL sp_deleteAuthor(?);`;
+        await db.query(query2, [data.delete_author_id]);
 
-// RESET////
+        console.log(`Deleted ID: ${data.delete_author_id}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/books');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while deleting book using database queries.'
+        );
+    }
+});
+
+
+
+
+
+
+
+
+
+
+//// ************* RESET SECTION ******************** ////
 app.post('/reset', async function (req, res) {
     try {
         const query_reset = `CALL sp_load_publisherdb();`;

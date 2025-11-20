@@ -30,7 +30,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.email}}</td>
 
             {{! DELETE form }}
-            <form id='delete_author_form'>
+            <form id='delete_author_form' method="POST" action='/authors/delete'>
                 <input type='hidden' name='delete_author_id' value='{{this.authorID}}' />
                 <input type='hidden' name='delete_author_name' value='{{this.firstName}} {{this.lastName}}' />
                 <td>
@@ -46,15 +46,15 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! CREATE form }}
 <h2>Create an Author</h2>
-<form class='authorForm' id='create_author_form'>
+<form class='authorForm' id='create_author_form' method="POST" action='/authors/create'>
     <label for='create_author_fname'>First Name: </label>
     <input type='text' name='create_author_fname' id='create_author_fname' required />
 
     <label for='create_author_lname'>Last Name: </label>
-    <input type='text' name='create_author_lname' id='create_author_lname' />
+    <input type='text' name='create_author_lname' id='create_author_lname' required />
 
     <label for='create_author_email'>Email: </label>
-    <input type='text' name='create_author_email' id='create_author_email' />
+    <input type='text' name='create_author_email' id='create_author_email' required/>
 
     <input type='submit' />
 </form>
