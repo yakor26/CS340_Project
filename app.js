@@ -216,6 +216,29 @@ app.post('/books/create', async function (req, res) {
     }
 });
 
+// DELETE ////
+app.post('/books/delete', async function (req, res) {
+    try {
+        // grab info
+        let data = req.body;
+        // call query
+        const query2 = `CALL sp_deleteBook(?);`;
+        await db.query(query2, [data.delete_book_id]);
+
+        console.log(`Deleted ID: ${data.delete_book_id}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/books');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while deleting book using database queries.'
+        );
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
