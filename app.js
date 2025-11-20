@@ -193,10 +193,10 @@ app.post('/books/create', async function (req, res) {
         }
 
         // call query
-        const query1 = `CALL sp_createBook(?, ?, ?, ?, @new_book_id);`;
+        const query_book = `CALL sp_createBook(?, ?, ?, ?, @new_book_id);`;
 
         // 
-        const [[[rows]]] = await db.query(query1, [
+        const [[[rows]]] = await db.query(query_book, [
             data.create_book_title,
             data.create_book_page_count,
             data.create_book_publish_date,
@@ -216,7 +216,37 @@ app.post('/books/create', async function (req, res) {
     }
 });
 
-// DELETE ////
+// create route for Authors
+app.post('/authors/create', async function (req, res) {
+    try {
+        // grab info from form
+        let data = req.body;
+        // call query
+        const query_author = `CALL sp_createAuthor(?, ?, ?, @new_author_id);`;
+
+        // 
+        const [[[rows]]] = await db.query(query_author, [
+            data.create_author_firstname,
+            data.create_author_lastname,
+            data.create_author_email
+
+        ]);
+
+        console.log(`Successfully Created Author: ${data.create_book_firstname} ${data.create_book_lastname}, Author ID: ${rows.new_author_id} `);
+
+        // Redirect back to books
+        res.redirect('/authors');
+    } catch (error) {
+        console.error('Error creating authors:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while creating author.'
+        );
+    }
+});
+
+
+//// DELETE SECTION ////
 app.post('/books/delete', async function (req, res) {
     try {
         // grab info
