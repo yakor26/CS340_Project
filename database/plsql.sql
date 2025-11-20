@@ -19,6 +19,8 @@ BEGIN
     VALUES(p_title, p_pageCount, p_publishDate, p_advanceAmount);
 
     SELECT LAST_INSERT_ID() into p_bookID;
+    -- for debugging 
+    SELECT LAST_INSERT_ID() AS new_book_id;
 END //
 DELIMITER ;
 
@@ -36,6 +38,7 @@ BEGIN
     VALUES(p_firstName, p_lastName, p_email);
 
     SELECT LAST_INSERT_ID() into p_authorID;
+    SELECT LAST_INSERT_ID() AS new_author_id;
 END //
 DELIMITER ;
 
@@ -53,6 +56,7 @@ BEGIN
     VALUES(p_name, p_email, p_organizationBuyer);
 
     SELECT LAST_INSERT_ID() into p_buyerID;
+    SELECT LAST_INSERT_ID() AS new_buyer_id;
 END //
 DELIMITER ;
 
@@ -69,6 +73,8 @@ BEGIN
     VALUES(p_category, p_royaltyPercentage);
 
     SELECT LAST_INSERT_ID() into p_formatID;
+    SELECT LAST_INSERT_ID() AS new_format_id;
+
 END //
 DELIMITER ;
 
@@ -85,6 +91,7 @@ BEGIN
     VALUES(p_buyerID, p_orderDate);
 
     SELECT LAST_INSERT_ID() into p_orderID;
+    SELECT LAST_INSERT_ID() AS new_order_id;
 END //
 DELIMITER ;
 
