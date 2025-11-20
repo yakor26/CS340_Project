@@ -30,7 +30,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.advanceAmount}}</td>
 
             {{! DELETE form }}
-            <form id='delete_book_form'>
+            <form id='delete_book_form' method='POST' action='/books/delete'>
                 <input type='hidden' name='delete_book_id' value='{{this.bookID}}' />
                 <td>
                     <button type='submit'>
@@ -56,7 +56,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     <input type='date' name='create_book_publish_date' id='create_book_publish_date' required />
 
     <label for='create_book_advance_amount'>Advance Amount: </label>
-    <input type='number' name='create_book_advance_amount' id='create_book_advance_amount' required />
+    <input type='number' name='create_book_advance_amount' id='create_book_advance_amount' step='0.01' required />
 
     
     <input type='submit' />
