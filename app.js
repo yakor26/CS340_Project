@@ -181,3 +181,48 @@ app.listen(PORT, function () {
             '; press Ctrl-C to terminate.'
     );
 });
+
+// Citation for the following code:
+// Date: 11/20/2025
+// Adapted from: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-implementing-cud-operations-in-your-app?module_item_id=25645149
+
+// Create Routes
+
+// create route for Books
+app.post('/books/create', async function (req, res) {
+    try {
+        // grab info from form
+        let data = req.body;
+
+        // Cofirm values entered are numbers for page count and advance amount
+        if (isNaN(parseInt(data.create_book_page_count))) {
+            data.create_book_page_count = null;
+        }
+        if (isNaN(parseFloat(data.create_book_advance_amount))) {
+            data.create_book_advance_amount = null;
+        }
+
+        // call query
+        const query1 = `CALL sp_createBook(?, ?, ?, ?, @new_book_id);`;
+
+        // 
+        const [[[rows]]] = await db.query(query1, [
+            data.create_book_title,
+            data.create_book_page_count,
+            data.create_book_publish_date,
+            data.create_book_advance_amount,
+        ]);
+
+        console.log(`Created Book, Book ID: ${rows.new_book_id} ` + `Title: ${data.create_book_title}`
+        );
+
+        // Redirect back to books
+        res.redirect('/books');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
+        );
+    }
+});
