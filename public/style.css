@@ -38,7 +38,7 @@ nav {
     width: 15%;       
 }
 
-nav a{
+nav a {
     display: block;
     padding: 10px;
     color: white;
@@ -50,6 +50,14 @@ nav a:hover {
     background-color: #B6B6D6;
 }
 
-a {margin-left: 16px;}
+a,.resetbtn {
+    margin-left: 16px;
+}
 .homepageDescription {margin-left: 32px;}
 
+/*will update with relative units*/
+.resetbtn {
+    margin: 30px;
+    padding: 22px 25px;
+
+}
