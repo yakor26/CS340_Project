@@ -171,16 +171,6 @@ app.get('/booksformats', async function (req, res) {
     }
 });
 
-// ########################################
-// ########## LISTENER
-
-app.listen(PORT, function () {
-    console.log(
-        'Express started on http://localhost:' +
-            PORT +
-            '; press Ctrl-C to terminate.'
-    );
-});
 
 // Citation for the following code:
 // Date: 11/20/2025
@@ -194,7 +184,7 @@ app.post('/books/create', async function (req, res) {
         // grab info from form
         let data = req.body;
 
-        // Cofirm values entered are numbers for page count and advance amount
+        // Cofirm page count is an integer
         if (isNaN(parseInt(data.create_book_page_count))) {
             data.create_book_page_count = null;
         }
@@ -213,8 +203,7 @@ app.post('/books/create', async function (req, res) {
             data.create_book_advance_amount,
         ]);
 
-        console.log(`Created Book, Book ID: ${rows.new_book_id} ` + `Title: ${data.create_book_title}`
-        );
+        console.log(`Successfully Created Book Title: ${data.create_book_title}, Book ID: ${rows.new_book_id} `);
 
         // Redirect back to books
         res.redirect('/books');
@@ -225,4 +214,15 @@ app.post('/books/create', async function (req, res) {
             'An error occurred while executing the database queries.'
         );
     }
+});
+
+// ########################################
+// ########## LISTENER
+
+app.listen(PORT, function () {
+    console.log(
+        'Express started on http://localhost:' +
+            PORT +
+            '; press Ctrl-C to terminate.'
+    );
 });
