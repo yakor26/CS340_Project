@@ -239,6 +239,23 @@ app.post('/books/delete', async function (req, res) {
     }
 });
 
+// RESET////
+app.post('/reset', async function (req, res) {
+    try {
+        const query_reset = `CALL sp_load_publisherdb();`;
+        await db.query(query_reset)
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while reseting database.'
+        );
+    }
+});
+
 // ########################################
 // ########## LISTENER
 
