@@ -28,7 +28,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.royaltyPercentage}}</td>
 
             {{! DELETE form }}
-            <form id='delete_format_form'>
+            <form id='delete_format_form' method="POST" action='/formats/delete'>
                 <input type='hidden' name='delete_format_id' value='{{this.formatID}}' />
                 <td>
                     <button type='submit'>
@@ -43,7 +43,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! CREATE form }}
 <h2>Create a Format</h2>
-<form class='formatForm' id='create_format_form'>
+<form class='formatForm' id='create_format_form' method="POST" action='/formats/create'>
     <label for='create_format_category'>Category: </label>
     <select name='create_format_category' id='create_format_category' required>
         <option value='Paperback' selected>Paperback</option>

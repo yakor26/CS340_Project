@@ -269,7 +269,35 @@ app.post('/buyers/create', async function (req, res) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
         res.status(500).send(
-            'An error occurred while executing the database queries.'
+            'An error occurred while adding to the buyers database queries.'
+        );
+    }
+});
+
+// create route for Formats
+app.post('/formats/create', async function (req, res) {
+    try {
+        // grab info from form
+        let data = req.body;
+
+        // call query
+        const query_format = `CALL sp_createFormat(?, ?, @new_format_id);`;
+
+        // 
+        const [[[rows]]] = await db.query(query_format, [
+            data.create_format_category,
+            data.create_format_royalty_percentage,
+        ]);
+
+        console.log(`Successfully Created Format: ${data.create_format_name}, Format ID: ${rows.new_format_id} `);
+
+        // Redirect back to books
+        res.redirect('/formats');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing adding to formats database queries.'
         );
     }
 });
@@ -345,6 +373,28 @@ app.post('/buyers/delete', async function (req, res) {
     }
 });
 
+// Formats Delete Section
+app.post('/formats/delete', async function (req, res) {
+    try {
+        // grab info
+        let data = req.body;
+        // call query
+        const query_del_format = `CALL sp_deleteFormat(?);`;
+        await db.query(query_del_format, [data.delete_format_id]);
+
+        console.log(`Deleted ID: ${data.delete_format_id}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/formats');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while deleting format using database queries.'
+        );
+    }
+});
 
 
 

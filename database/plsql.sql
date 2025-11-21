@@ -184,3 +184,32 @@ END //
 DELIMITER ;
 
 
+-- delete format --
+DROP PROCEDURE IF EXISTS sp_deleteFormat;
+
+DELIMITER //
+CREATE PROCEDURE sp_deleteFormat(IN p_formatID INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- account for errors
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Formats WHERE formatID = p_formatID;
+
+        -- check id matches, if none raise error
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Formats for id: ', p_formatID);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
