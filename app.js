@@ -1,4 +1,3 @@
-
 // Citation for the following code:
 // Date: 11/05/2025
 // Adapted from:
@@ -216,6 +215,7 @@ app.post('/books/create', async function (req, res) {
     }
 });
 
+
 // create route for Authors
 app.post('/authors/create', async function (req, res) {
     try {
@@ -224,23 +224,52 @@ app.post('/authors/create', async function (req, res) {
         // call query
         const query_author = `CALL sp_createAuthor(?, ?, ?, @new_author_id);`;
 
-        // 
+        
         const [[[rows]]] = await db.query(query_author, [
-            data.create_author_firstname,
-            data.create_author_lastname,
+            data.create_author_fname,
+            data.create_author_lname,
             data.create_author_email
 
         ]);
+    
+        // console.log(`Successfully Created Author: ${data.create_author_fname} ${data.create_author_lname}, Author ID: ${rows[0].new_author_id} `);
 
-        console.log(`Successfully Created Author: ${data.create_book_firstname} ${data.create_book_lastname}, Author ID: ${rows.new_author_id} `);
-
-        // Redirect back to books
+        // Redirect back to authors
         res.redirect('/authors');
     } catch (error) {
         console.error('Error creating authors:', error);
         // Send a generic error message to the browser
         res.status(500).send(
             'An error occurred while creating author.'
+        );
+    }
+});
+
+// create route for Buyers
+app.post('/buyers/create', async function (req, res) {
+    try {
+        // grab info from form
+        let data = req.body;
+
+        // call query
+        const query_buyer = `CALL sp_createBuyer(?, ?, ?, @new_buyer_id);`;
+
+        // 
+        const [[[rows]]] = await db.query(query_buyer, [
+            data.create_buyer_name,
+            data.create_buyer_email,
+            data.create_buyer_organization_buyer,
+        ]);
+
+        console.log(`Successfully Created Buyer: ${data.create_buyer_name}, Buyer ID: ${rows.new_buyer_id} `);
+
+        // Redirect back to books
+        res.redirect('/buyers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing the database queries.'
         );
     }
 });
@@ -283,7 +312,7 @@ app.post('/authors/delete', async function (req, res) {
         );
 
         // Redirect the user to the updated webpage data
-        res.redirect('/books');
+        res.redirect('/authors');
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
@@ -319,9 +348,10 @@ app.post('/reset', async function (req, res) {
     }
 });
 
-// ########################################
-// ########## LISTENER
 
+
+########################################
+########## LISTENER
 app.listen(PORT, function () {
     console.log(
         'Express started on http://localhost:' +
@@ -329,3 +359,5 @@ app.listen(PORT, function () {
             '; press Ctrl-C to terminate.'
     );
 });
+
+
