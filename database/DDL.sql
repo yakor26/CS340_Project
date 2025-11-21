@@ -20,7 +20,7 @@ SET AUTOCOMMIT = 0;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Buyers ;
 CREATE TABLE IF NOT EXISTS Buyers (
-  buyerID INT NOT NULL UNIQUE AUTO_INCREMENT,
+  buyerID INT NOT NULL AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   organizationBuyer TINYINT(1) DEFAULT 0 NOT NULL,
@@ -37,7 +37,7 @@ VALUES ('Kings Public Library', 'kpc@kp.org', 1),
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Books ;
 CREATE TABLE IF NOT EXISTS Books (
-  bookID INT NOT NULL UNIQUE AUTO_INCREMENT,
+  bookID INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(100) NOT NULL,
   pageCount INT NULL,
   publishDate DATE NOT NULL,
@@ -55,7 +55,7 @@ VALUES ('Deep in the Abyss', 340, '2025-01-22', 2500.00),
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS Authors ;
 CREATE TABLE IF NOT EXISTS Authors (
-  authorID INT NOT NULL UNIQUE AUTO_INCREMENT,
+  authorID INT NOT NULL AUTO_INCREMENT,
   firstName VARCHAR(50) NOT NULL,
   lastName VARCHAR(50) NOT NULL,
   email VARCHAR(100) NOT NULL UNIQUE,
@@ -193,3 +193,6 @@ COMMIT;
 -- Close out
 END //
 DELIMITER ;
+
+-- To reset the database run: `CALL sp_load_publisherdb();`
+
