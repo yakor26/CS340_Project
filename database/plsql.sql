@@ -30,14 +30,14 @@ DELIMITER //
 CREATE PROCEDURE sp_createAuthor(
     IN p_firstName VARCHAR(50),
     IN p_lastName VARCHAR(50),
-    IN p_email VARCHAR(100),
+    IN p_email VARCHAR(100)
     OUT p_authorID INT
 )
 BEGIN
     INSERT INTO Authors(firstName, lastName, email)
     VALUES(p_firstName, p_lastName, p_email);
 
-    SELECT LAST_INSERT_ID() into p_authorID;
+    SELECT LAST_INSERT_ID() AS p_authorID;
     SELECT LAST_INSERT_ID() AS new_author_id;
 END //
 DELIMITER ;
@@ -153,4 +153,34 @@ BEGIN
 
 END //
 DELIMITER ;
+
+-- delete buyer --
+DROP PROCEDURE IF EXISTS sp_deleteBuyer;
+
+DELIMITER //
+CREATE PROCEDURE sp_deleteBuyer(IN p_buyerID INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- account for errors
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Buyers WHERE buyerID = p_buyerID;
+
+        -- check id matches, if none raise error
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Buyers for id: ', p_buyerID);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
 

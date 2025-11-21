@@ -30,7 +30,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.organizationBuyer}}</td>
 
             {{! DELETE form }}
-            <form id='delete_buyer_form'>
+            <form id='delete_buyer_form' method="POST" action='/buyers/delete'>
                 <input type='hidden' name='delete_buyer_id' value='{{this.buyerID}}' />
                 <td>
                     <button type='submit'>
@@ -45,12 +45,12 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! CREATE form }}
 <h2>Create a Buyer</h2>
-<form class='buyerForm' id='create_buyer_form'>
+<form class='buyerForm' id='create_buyer_form' method="POST" action='/buyers/create'>
     <label for='create_buyer_name'>Name: </label>
     <input type='text' name='create_buyer_name' id='create_buyer_name' required />
 
     <label for='create_buyer_email'>Email: </label>
-    <input type='text' name='create_buyer_email' id='create_buyer_email' />
+    <input type='text' name='create_buyer_email' id='create_buyer_email' required />
 
     <label for='create_buyer_organization_buyer'>Organization Buyer: </label>
      <select name='create_buyer_organization_buyer' id='create_buyer_organization_buyer'>

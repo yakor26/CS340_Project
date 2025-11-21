@@ -222,7 +222,7 @@ app.post('/authors/create', async function (req, res) {
         // grab info from form
         let data = req.body;
         // call query
-        const query_author = `CALL sp_createAuthor(?, ?, ?, @new_author_id);`;
+        const query_author = `CALL sp_createAuthor(?, ?, ?);`;
 
         
         const [[[rows]]] = await db.query(query_author, [
@@ -283,8 +283,8 @@ app.post('/books/delete', async function (req, res) {
         // grab info
         let data = req.body;
         // call query
-        const query2 = `CALL sp_deleteBook(?);`;
-        await db.query(query2, [data.delete_book_id]);
+        const query_del_book = `CALL sp_deleteBook(?);`;
+        await db.query(query_del_book, [data.delete_book_id]);
 
         console.log(`Deleted ID: ${data.delete_book_id}`
         );
@@ -305,8 +305,8 @@ app.post('/authors/delete', async function (req, res) {
         // grab info
         let data = req.body;
         // call query
-        const query2 = `CALL sp_deleteAuthor(?);`;
-        await db.query(query2, [data.delete_author_id]);
+        const query_del_author = `CALL sp_deleteAuthor(?);`;
+        await db.query(query_del_author, [data.delete_author_id]);
 
         console.log(`Deleted ID: ${data.delete_author_id}`
         );
@@ -318,6 +318,29 @@ app.post('/authors/delete', async function (req, res) {
         // Send a generic error message to the browser
         res.status(500).send(
             'An error occurred while deleting book using database queries.'
+        );
+    }
+});
+
+// Buyers Delete Section
+app.post('/buyers/delete', async function (req, res) {
+    try {
+        // grab info
+        let data = req.body;
+        // call query
+        const query_del_buyer = `CALL sp_deleteBuyer(?);`;
+        await db.query(query_del_buyer, [data.delete_buyer_id]);
+
+        console.log(`Deleted ID: ${data.delete_buyer_id}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/buyers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while deleting buyer using database queries.'
         );
     }
 });
@@ -350,8 +373,8 @@ app.post('/reset', async function (req, res) {
 
 
 
-########################################
-########## LISTENER
+// ########################################
+// ########## LISTENER
 app.listen(PORT, function () {
     console.log(
         'Express started on http://localhost:' +
