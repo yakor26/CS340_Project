@@ -1,4 +1,7 @@
-
+:root {
+    /* --accenttable: RGB(255,211,172,0.5) */
+    --accenttable: rgb(109,129,150,0.3)
+}
 body {
     margin: 0;
     padding: 0;
@@ -6,17 +9,24 @@ body {
 }
 
 .mainsection {
-    margin-left: 20%;
+    margin-left: 18%;
+    font-size: 16px;
+    color: #272757;
 }
 h1, h2 { margin-left: 16px;}
 table {border-collapse: collapse;margin-left: 32px;}
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    border: 2px solid #272757;
+    padding: 20px;
     text-align: center;
+    font-weight: 600;
 }
-th {background-color: #f2f2f2;}
-tr:nth-child(even) {background-color: #f9f9f9;}
+th {
+    background-color: rgb(109,129,150,0.6);
+}
+tr:nth-child(even) {
+    background-color: var(--accenttable);
+}
 .cuForm { margin-left: 32px;}
 input, select { margin-bottom: 4px;margin-right: 12px;}
 
@@ -60,4 +70,8 @@ a,.resetbtn {
     margin: 30px;
     padding: 22px 25px;
 
+}
+
+form {
+    display: block;
 }
