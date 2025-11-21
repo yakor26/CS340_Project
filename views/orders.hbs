@@ -77,7 +77,16 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         <option value='' disabled selected>Select an Order</option>
         {{#each orders}}
         <option value='{{this.orderID}}' required>
-            {{this.orderID}}
+            {{this.orderID}} 
+        </option>
+        {{/each}}
+    </select>
+
+    <select name='update_buyer_id' id='update_buyer_id' required>
+        <option value='' disabled selected>Select a Buyer</option>
+        {{#each buyers}}
+        <option value='{{this.buyerID}}' required>
+            {{this.buyerID}} - {{this.name}}
         </option>
         {{/each}}
     </select>
