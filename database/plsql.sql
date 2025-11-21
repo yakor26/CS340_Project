@@ -213,3 +213,32 @@ BEGIN
 END //
 DELIMITER ;
 
+-- delete order --
+DROP PROCEDURE IF EXISTS sp_deleteOrder;
+
+DELIMITER //
+CREATE PROCEDURE sp_deleteOrder(IN p_orderID INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- account for errors
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM Orders WHERE orderID = p_orderID;
+
+        -- check id matches, if none raise error
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in Orders for id: ', p_orderID);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+

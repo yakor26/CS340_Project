@@ -302,6 +302,34 @@ app.post('/formats/create', async function (req, res) {
     }
 });
 
+// create route for Orders
+app.post('/orders/create', async function (req, res) {
+    try {
+        // grab info from form
+        let data = req.body;
+
+        // call query
+        const query_order = `CALL sp_createOrder(?, ?, @new_order_id);`;
+
+        // 
+        const [[[rows]]] = await db.query(query_order, [
+            data.create_order_buyer,
+            data.create_order_date
+        ]);
+
+        console.log(`Successfully Created Order ID: ${rows.new_order_id} `);
+
+        // Redirect back to orders
+        res.redirect('/orders');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing adding to orders database queries.'
+        );
+    }
+});
+
 
 //// ******************* DELETE SECTION ******************* ////
 
@@ -392,6 +420,29 @@ app.post('/formats/delete', async function (req, res) {
         // Send a generic error message to the browser
         res.status(500).send(
             'An error occurred while deleting format using database queries.'
+        );
+    }
+});
+
+// Orders Delete Section
+app.post('/orders/delete', async function (req, res) {
+    try {
+        // grab info
+        let data = req.body;
+        // call query
+        const query_del_order = `CALL sp_deleteOrder(?);`;
+        await db.query(query_del_order, [data.delete_order_id]);
+
+        console.log(`Deleted ID: ${data.delete_order_id}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/orders');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while deleting order using database queries.'
         );
     }
 });

@@ -28,7 +28,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.orderDate}}</td>
             
             {{! DELETE form }}
-            <form id='delete_order_form'>
+            <form id='delete_order_form' method="POST" action='/orders/delete'>
                 <input type='hidden' name='delete_order_id' value='{{this.orderID}}' />
                 <td>
                     <button type='submit'>
@@ -50,7 +50,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
        # included snippet of code
 7      # AI Source URL: https://copilot.microsoft.com/ --}}
 <h2>Create an Order</h2>
-<form class='orderForm' id='create_order_form'>
+<form class='orderForm' id='create_order_form' method= "POST" action='/orders/create'>
     {{!reference all available buyers to select from}}
     <label for='create_order_buyer'>Buyer: </label>
     <select name='create_order_buyer' id='create_order_buyer' required>
@@ -59,16 +59,14 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         <option value='{{this.buyerID}}' required>
             {{this.buyerID}}
             -
-            {{this.firstName}}, {{this.lastName}}
+            {{this.name}}
         </option>
         {{/each}}
     </select>
 
     <label for='create_order_date'>Order Date: </label>
     <input type='date' name='create_order_date' id='create_order_date'required/>
-
-    
-    <input type='submit' />
+    <button type="submit">Submit</button>
 </form>
 
 {{! UPDATE form }}
