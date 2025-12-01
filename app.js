@@ -130,7 +130,8 @@ app.get('/authorsbooks', async function (req, res) {
         Authors.lastName, Books.title AS bookTitle
                         FROM AuthorsBooks
                         JOIN Authors ON Authors.authorID = AuthorsBooks.authorID
-                        JOIN Books ON Books.bookID = AuthorsBooks.bookID; `
+                        JOIN Books ON Books.bookID = AuthorsBooks.bookID
+                        ORDER BY authorBookID; `
     
         const [authorsbooks] = await db.query(query6);
         res.render('authorsbooks', { authorsbooks: authorsbooks});
@@ -152,7 +153,8 @@ app.get('/booksorders', async function (req, res) {
                         FROM BooksOrders
                         JOIN Books ON Books.bookID = BooksOrders.bookID
                         JOIN Orders ON Orders.orderID = BooksOrders.orderID
-                        JOIN Buyers ON Buyers.buyerID = Orders.buyerID`;
+                        JOIN Buyers ON Buyers.buyerID = Orders.buyerID
+                        ORDER BY bookOrderID`;
         const [booksorders] = await db.query(query7);
         res.render('booksorders', { booksorders: booksorders});
     } catch (error) {
@@ -172,7 +174,8 @@ app.get('/booksformats', async function (req, res) {
                         Books.title AS bookTitle, Formats.category
                         FROM BooksFormats
                         JOIN Books ON Books.bookID = BooksFormats.bookID
-                        JOIN Formats ON Formats.formatID = BooksFormats.formatID`;;
+                        JOIN Formats ON Formats.formatID = BooksFormats.formatID
+                        ORDER BY bookFormatID`;;
         const [booksformats] = await db.query(query8);
         res.render('booksformats', { booksformats: booksformats});
     } catch (error) {
