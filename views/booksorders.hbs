@@ -10,11 +10,12 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     <thead>
         {{! For the table header row, we print the DB attribute names }}
         <tr>
-            {{#each booksorders.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
+            <th>bookOrderID</th>
+            <th>orderID</th>
+            <th>buyer</th>
+            <th>bookID</th>
+            <th>bookTitle</th>
+            <th>quantity</th>
             <th></th>
             <th></th>
         </tr>
@@ -24,8 +25,11 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         {{! For each row, print the order id, book id, quantity}}
         {{#each booksorders}}
         <tr>
+            <td>{{this.bookOrderID}}</td>
             <td>{{this.orderID}}</td>
+            <td>{{this.buyer}}</td>
             <td>{{this.bookID}}</td>
+            <td>{{bookTitle}}</td>
             <td>{{this.quantity}}</td>
 
             {{! UPDATE form }}

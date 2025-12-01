@@ -149,7 +149,7 @@ app.get('/booksorders', async function (req, res) {
     try {
         // submit query
         const query7 = `SELECT bookOrderID, BooksOrders.bookID, BooksOrders.orderID, 
-                        Books.title AS bookTitle, Orders.buyerID, Buyers.name
+                        Books.title AS bookTitle, Orders.buyerID, Buyers.name AS buyer, BooksOrders.quantity
                         FROM BooksOrders
                         JOIN Books ON Books.bookID = BooksOrders.bookID
                         JOIN Orders ON Orders.orderID = BooksOrders.orderID
@@ -170,8 +170,8 @@ app.get('/booksorders', async function (req, res) {
 app.get('/booksformats', async function (req, res) {
     try {
         // submit query
-        const query8 = `SELECT bookFormatID, BooksFormats.bookID, BooksFormats.formatID, 
-                        Books.title AS bookTitle, Formats.category
+        const query8 = `SELECT bookFormatID, BooksFormats.bookID, BooksFormats.formatID,  BooksFormats.price,
+                        Books.title AS bookTitle, Formats.category AS formatCategory
                         FROM BooksFormats
                         JOIN Books ON Books.bookID = BooksFormats.bookID
                         JOIN Formats ON Formats.formatID = BooksFormats.formatID
