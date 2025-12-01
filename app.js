@@ -126,7 +126,11 @@ app.get('/orders', async function (req, res) {
 app.get('/authorsbooks', async function (req, res) {
     try {
         // submit query
-        const query6 = 'SELECT * FROM AuthorsBooks';
+        const query6 = `SELECT authorBookID, AuthorsBooks.authorID, AuthorsBooks.bookID,
+                        Authors.firstName, Authors.lastName, Books.title AS bookTitle
+                        FROM AuthorsBooks
+                        JOIN Authors ON Authors.authorID = AuthorsBooks.authorID
+                        JOIN Books ON Books.bookID = AuthorsBooks.bookID `;
         const [authorsbooks] = await db.query(query6);
         res.render('authorsbooks', { authorsbooks: authorsbooks});
     } catch (error) {
@@ -142,7 +146,12 @@ app.get('/authorsbooks', async function (req, res) {
 app.get('/booksorders', async function (req, res) {
     try {
         // submit query
-        const query7 = 'SELECT * FROM BooksOrders';
+        const query7 = `SELECT bookOrderID, BooksOrders.bookID, BooksOrders.orderID, 
+                        Books.title AS bookTitle, Orders.buyerID, Buyers.name
+                        FROM BooksOrders
+                        JOIN Books ON Books.bookID = BooksOrders.bookID
+                        JOIN Orders ON Orders.orderID = BooksOrders.orderID
+                        JOIN Buyers ON Buyers.buyerID = Orders.buyerID`;
         const [booksorders] = await db.query(query7);
         res.render('booksorders', { booksorders: booksorders});
     } catch (error) {
@@ -158,7 +167,11 @@ app.get('/booksorders', async function (req, res) {
 app.get('/booksformats', async function (req, res) {
     try {
         // submit query
-        const query8 = 'SELECT * FROM BooksFormats';
+        const query8 = `SELECT bookFormatID, BooksFormats.bookID, BooksFormats.formatID, 
+                        Books.title AS bookTitle, Formats.category
+                        FROM BooksFormats
+                        JOIN Books ON Books.bookID = BooksFormats.bookID
+                        JOIN Formats ON Formats.formatID = BooksFormats.formatID`;;
         const [booksformats] = await db.query(query8);
         res.render('booksformats', { booksformats: booksformats});
     } catch (error) {

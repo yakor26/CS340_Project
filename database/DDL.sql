@@ -108,10 +108,12 @@ VALUES ('Paperback', 7.50),
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS BooksOrders ;
 CREATE TABLE IF NOT EXISTS BooksOrders (
+  bookOrderID INT NOT NULL AUTO_INCREMENT,
   bookID INT NOT NULL,
   orderID INT NOT NULL,
   quantity INT NOT NULL,
-  PRIMARY KEY (bookID, orderID),
+  PRIMARY KEY (bookOrderID),
+  UNIQUE(bookID, orderID),
   INDEX fk_Books_has_Orders_Orders1_idx (orderID ASC),
   INDEX fk_Books_has_Orders_Books1_idx (bookID ASC),
   CONSTRAINT fk_Books_has_Orders_Books1
@@ -124,6 +126,7 @@ CREATE TABLE IF NOT EXISTS BooksOrders (
     REFERENCES Orders (orderID)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+
 -- -----------------------------------------------------
 -- add to book orders intersection table
 INSERT INTO BooksOrders (orderID, bookID, quantity)
@@ -136,12 +139,14 @@ VALUES (1, 4, 1000),
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS BooksFormats ;
 CREATE TABLE IF NOT EXISTS BooksFormats (
+  bookFormatID INT NOT NULL AUTO_INCREMENT,
   bookID INT NOT NULL,
   formatID INT NOT NULL,
   price DECIMAL(5,2) NULL,
-  PRIMARY KEY (bookID, formatID),
+  PRIMARY KEY (bookFormatID),
   INDEX fk_Books_has_Formats_Formats1_idx (formatID ASC),
   INDEX fk_Books_has_Formats_Books1_idx (bookID ASC),
+  UNIQUE(bookID, formatID),
   CONSTRAINT fk_Books_has_Formats_Books1
     FOREIGN KEY (bookID)
     REFERENCES Books (bookID)
@@ -164,11 +169,13 @@ VALUES (1, 3, 11.99),
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS AuthorsBooks ;
 CREATE TABLE IF NOT EXISTS AuthorsBooks (
+  authorBookID INT NOT NULL AUTO_INCREMENT,
   authorID INT NOT NULL,
   bookID INT NOT NULL,
-  PRIMARY KEY (authorID, bookID),
+  PRIMARY KEY (authorBookID),
   INDEX fk_Authors_has_Books_Books1_idx (bookID ASC),
   INDEX fk_Authors_has_Books_Authors1_idx (authorID ASC),
+  UNIQUE(authorID, bookID),
   CONSTRAINT fk_Authors_has_Books_Authors1
     FOREIGN KEY (authorID)
     REFERENCES Authors (authorID)

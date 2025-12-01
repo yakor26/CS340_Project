@@ -242,3 +242,18 @@ BEGIN
 END //
 DELIMITER ;
 
+
+----- UPDATE SECTION -----
+DROP PROCEDURE IF EXISTS sp_updateAuthorsBooks;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateAuthorsBooks(
+    IN p_id INT, 
+    IN p_homeworld INT, 
+    IN p_age INT)
+
+BEGIN
+    UPDATE bsg_people SET homeworld = p_homeworld, age = p_age WHERE id = p_id; 
+END //
+DELIMITER ;
+
