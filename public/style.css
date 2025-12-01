@@ -75,3 +75,8 @@ a,.resetbtn {
 form {
     display: block;
 }
+
+.actions form {
+    display: inline-flex;
+    gap: 10px;
+}

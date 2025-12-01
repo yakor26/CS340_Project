@@ -17,8 +17,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <th>formatID</th>
             <th>formatCategory</th>
             <th>price</th>
-            <th></th>
-            <th></th>
+            <th>actions</th>
         </tr>
     </thead>
 
@@ -34,23 +33,19 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{this.price}}</td>
 
             {{! UPDATE form }}
-            <form class='authorBookFormatForm' id='update_book_format_form'>
-                <td>
+            <td class="actions">
+                <form class='authorBookFormatForm' id='update_book_format_form'></form>
                     <button type="submit">Edit</button>
-                </td>
-            </form>
+                </form>
 
-            {{! DELETE form }}
-            <form id='delete_books_formats_form'>
-                <input type='hidden' name='delete_books_id' value='{{this.bookID}}' />
-                <input type='hidden' name='delete_formats_id' value='{{this.formatID}}' />
-
-                <td>
+                 {{! DELETE form }}
+                <form id='delete_books_formats_form'>
+                    <input type='hidden' name='delete_books_id' value='{{this.bookFormatID}}' />
                     <button type='submit'>
                         Delete
                     </button>
-                </td>
-            </form>
+                </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>

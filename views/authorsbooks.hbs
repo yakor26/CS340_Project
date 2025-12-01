@@ -16,8 +16,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <th>authorName</th>
             <th>bookID</th>
             <th>booktitle</th>
-            <th></th>
-            <th></th>
+            <th>actions</th>
         </tr>
     </thead>
 
@@ -33,21 +32,18 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             
 
             {{! UPDATE form }}
-            <form class='authorBookForm' id='update_author_book_form'>
-                <td>
+            <td class="actions">
+                <form class='updateAuthorBookForm' id='update_author_book_form'>
                     <button type="submit">Edit</button>
-                </td>
-            </form>
+                </form>
 
-            {{! DELETE form }}
-            <form id='delete_author_books_form'>
+                {{! DELETE form }}
+                <form id='delete_author_books_form'>
                 <input type='hidden' name='delete_author_book_id' value='{{this.authorBookID}}' />
-                <td>
                     <button type='submit'>
                         Delete
                     </button>
-                </td>
-            </form>
+            </td>
         </tr>
         {{/each}}
     </tbody>
