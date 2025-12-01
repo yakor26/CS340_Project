@@ -125,12 +125,13 @@ app.get('/orders', async function (req, res) {
 // authorsbooks 
 app.get('/authorsbooks', async function (req, res) {
     try {
-        // submit query
-        const query6 = `SELECT authorBookID, AuthorsBooks.authorID, AuthorsBooks.bookID,
-                        Authors.firstName, Authors.lastName, Books.title AS bookTitle
+        //submit query
+        const query6 = `SELECT authorBookID, AuthorsBooks.authorID, AuthorsBooks.bookID, Authors.firstName, 
+        Authors.lastName, Books.title AS bookTitle
                         FROM AuthorsBooks
                         JOIN Authors ON Authors.authorID = AuthorsBooks.authorID
-                        JOIN Books ON Books.bookID = AuthorsBooks.bookID `;
+                        JOIN Books ON Books.bookID = AuthorsBooks.bookID; `
+    
         const [authorsbooks] = await db.query(query6);
         res.render('authorsbooks', { authorsbooks: authorsbooks});
     } catch (error) {
