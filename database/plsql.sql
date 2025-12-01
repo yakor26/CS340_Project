@@ -244,16 +244,48 @@ DELIMITER ;
 
 
 ----- UPDATE SECTION -----
+
+---- Update AuthorsBooks
 DROP PROCEDURE IF EXISTS sp_updateAuthorsBooks;
 
 DELIMITER //
 CREATE PROCEDURE sp_updateAuthorsBooks(
-    IN p_id INT, 
-    IN p_homeworld INT, 
-    IN p_age INT)
+    IN p_authorBookID INT, 
+    IN p_authorID INT, 
+    IN p_bookID INT)
 
 BEGIN
-    UPDATE bsg_people SET homeworld = p_homeworld, age = p_age WHERE id = p_id; 
+    UPDATE AuthorsBooks SET bookID = p_bookID, authorID = p_authorID WHERE authorBookID = p_authorBookID; 
 END //
 DELIMITER ;
 
+---------Update BooksOrders ------------
+DROP PROCEDURE IF EXISTS sp_updateBooksOrders;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateBooksOrders(
+    IN p_bookOrderID INT, 
+    IN p_bookID INT,
+    IN p_orderID INT,
+    IN p_quantity INT)
+
+
+BEGIN
+    UPDATE BooksOrders SET bookID = p_bookID, orderID = p_orderID, quantity = p_quantity WHERE bookOrderID = p_bookOrderID; 
+END //
+DELIMITER ;
+---------- Update BooksFormats -------------
+DROP PROCEDURE IF EXISTS sp_updateBooksFormats;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateBooksFormats(
+    IN p_bookFormatID INT, 
+    IN p_bookID INT,
+    IN p_formatID INT,
+    IN p_price DECIMAL(5,2))
+
+
+BEGIN
+    UPDATE BooksFormats SET bookID = p_bookID, formatID = p_formatID, price = p_price WHERE bookFormatID = p_bookFormatID; 
+END //
+DELIMITER ;
