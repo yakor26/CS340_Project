@@ -16,7 +16,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <th>authorName</th>
             <th>bookID</th>
             <th>booktitle</th>
-            <th>actions</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -31,12 +31,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{bookTitle}}</td>
             
 
-            {{! UPDATE form }}
-            <td class="actions">
-                <form class='updateAuthorBookForm' id='update_author_book_form'>
-                    <button type="submit">Edit</button>
-                </form>
-
+            <td>
                 {{! DELETE form }}
                 <form id='delete_author_books_form'>
                 <input type='hidden' name='delete_author_book_id' value='{{this.authorBookID}}' />
@@ -49,33 +44,41 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     </tbody>
 </table>
 
-
 {{! UPDATE form }}
-{{!-- <h2>Update an Author/Book</h2>
-<form class='authorBookForm' id='update_author_book_form'>
-    <label for='update_author_id'>Author to Update: </label>
-    <select name='update_author_id' id='update_author_id' required>
-        <option value='' disabled selected>Select an Author ID</option> --}}
-        {{!-- temporary placeholder --}}
-        {{!-- {{#each authorsbooks}}
-        <option value='{{this.authorID}}' required>
-            {{this.authorID}}
+<h2>Update an Authors/Books</h2>
+<form class='authorBookForm' id='update_author_book_form' method='POST' action='/authorsbooks/update'>
+    <label for='update_author_book_id'>Authors/Books to Update: </label>
+    <select name='update_author_book_id' id='update_author_book_id' required>
+        <option value='' disabled selected>Select AuthorBookID</option>
+        {{#each authorsbooks}}
+        <option value='{{this.authorBookID}}' required>
+            {{this.authorBookID}} - Author: {{this.firstName}} {{this.lastName}}, Book Title: {{this.bookTitle}}
         </option>
+        {{/each}}
+    </select>
+
+    <label for='update_author_id'> Author to Update: </label>
+    <select name='update_author_id' id='update_author_id' required>
+     <option value='' disabled selected>Select Author</option>
+        {{#each authors}}
+        <option value='{{this.authorID}}' required>
+            {{this.authorID}} - {{this.firstName}} {{this.lastName}}
+         </option>
         {{/each}}
     </select>
 
     <label for='update_book_id'> Book to Update: </label>
     <select name='update_book_id' id='update_book_id' required>
-     <option value='' disabled selected>Select an Book ID</option> --}}
-        {{!-- temporary placeholder --}}
-        {{!-- {{#each authorsbooks}}
+     <option value='' disabled selected>Select Book</option>
+        {{#each books}}
         <option value='{{this.bookID}}' required>
-            {{this.bookID}}
-        </option>
+            {{this.bookID}} - {{this.title}}
+         </option>
         {{/each}}
     </select>
 
 
+    <button>Update</button>
+</form>
+
      
-    <input type='submit' /> 
-</form> --}}

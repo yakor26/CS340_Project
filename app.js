@@ -132,9 +132,13 @@ app.get('/authorsbooks', async function (req, res) {
                         JOIN Authors ON Authors.authorID = AuthorsBooks.authorID
                         JOIN Books ON Books.bookID = AuthorsBooks.bookID
                         ORDER BY authorBookID; `
-    
+        const query7 = "SELECT authorID, firstName, lastName FROM Authors";
+        const query8 = "SELECT bookID, title FROM Books";
         const [authorsbooks] = await db.query(query6);
-        res.render('authorsbooks', { authorsbooks: authorsbooks});
+        const [authors] = await db.query(query7);
+        const [books] = await db.query(query8);
+        
+        res.render('authorsbooks', { authorsbooks, authors, books});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
@@ -155,8 +159,12 @@ app.get('/booksorders', async function (req, res) {
                         JOIN Orders ON Orders.orderID = BooksOrders.orderID
                         JOIN Buyers ON Buyers.buyerID = Orders.buyerID
                         ORDER BY bookOrderID`;
+        const query8 = 'SELECT orderID, orderDate FROM Orders';
+        const query9 = 'SELECT bookID, title FROM Books';
+        const [orders] = await db.query(query8);
+        const [books] = await db.query(query9);
         const [booksorders] = await db.query(query7);
-        res.render('booksorders', { booksorders: booksorders});
+        res.render('booksorders', { booksorders, orders, books});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
@@ -175,7 +183,7 @@ app.get('/booksformats', async function (req, res) {
                         FROM BooksFormats
                         JOIN Books ON Books.bookID = BooksFormats.bookID
                         JOIN Formats ON Formats.formatID = BooksFormats.formatID
-                        ORDER BY bookFormatID`;;
+                        ORDER BY bookFormatID`;
         const [booksformats] = await db.query(query8);
         res.render('booksformats', { booksformats: booksformats});
     } catch (error) {
@@ -464,6 +472,68 @@ app.post('/orders/delete', async function (req, res) {
     }
 });
 
+
+//// ************* UPDATE SECTION ******************** ////
+// authorsbooks
+app.post('/authorsbooks/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        // check valid
+        if (isNaN(parseInt(data.update_author_id)))
+            data.update_author_id = null;
+        if (isNaN(parseInt(data.update_book_id)))
+            data.update_book_id = null;
+
+        const query1 = 'CALL sp_updateAuthorsBooks(?, ?, ?);';
+        await db.query(query1, [
+            data.update_author_book_id,
+            data.update_author_id,
+            data.update_book_id
+        ]);
+
+        res.redirect('/authorsbooks');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the authorbooks database queries.'
+        );
+    }
+});
+
+// booksorders
+app.post('/booksorders/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        // check valid
+        if (isNaN(parseInt(data.update_book_id)))
+            data.update_book_id = null;
+        if (isNaN(parseInt(data.update_order_id)))
+            data.update_order_id = null;
+        if (isNaN(parseInt(data.update_quantity)))
+            data.update_quantity = null;
+
+        const query1 = 'CALL sp_updateBooksOrders(?, ?, ?);';
+        await db.query(query1, [
+            data.update_book_order_id,
+            data.update_book_id,
+            data.update_order_id,
+            data.update_quantity
+        ]);
+
+        res.redirect('/booksorders');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the booksorders database queries.'
+        );
+    }
+});
 
 
 
