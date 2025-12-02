@@ -184,8 +184,13 @@ app.get('/booksformats', async function (req, res) {
                         JOIN Books ON Books.bookID = BooksFormats.bookID
                         JOIN Formats ON Formats.formatID = BooksFormats.formatID
                         ORDER BY bookFormatID`;
+        const query9 = 'SELECT bookID, title FROM Books';
+        const query10 = 'SELECT bookID, title FROM Formats';
+        const [formats] = await db.query(query9);
+        const [books] = await db.query(query9);
         const [booksformats] = await db.query(query8);
-        res.render('booksformats', { booksformats: booksformats});
+        
+        res.render('booksformats', { booksformats, books, formats});
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser
@@ -514,15 +519,15 @@ app.post('/booksorders/update', async function (req, res) {
             data.update_book_id = null;
         if (isNaN(parseInt(data.update_order_id)))
             data.update_order_id = null;
-        if (isNaN(parseInt(data.update_quantity)))
-            data.update_quantity = null;
+        if (isNaN(parseInt(data.update_book_quantity)))
+            data.update_book_quantity = null;
 
-        const query1 = 'CALL sp_updateBooksOrders(?, ?, ?);';
+        const query1 = 'CALL sp_updateBooksOrders(?, ?, ?, ?);';
         await db.query(query1, [
             data.update_book_order_id,
             data.update_book_id,
             data.update_order_id,
-            data.update_quantity
+            data.update_book_quantity
         ]);
 
         res.redirect('/booksorders');
@@ -535,6 +540,37 @@ app.post('/booksorders/update', async function (req, res) {
     }
 });
 
+// booksformats
+app.post('/booksformats/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        // check valid
+        if (isNaN(parseInt(data.update_book_id)))
+            data.update_book_id = null;
+        if (isNaN(parseInt(data.update_format_id)))
+            data.update_format_id = null;
+        if (isNaN(parseFloat(data.update_price)))
+            data.update_price = null;
+
+        const query1 = 'CALL sp_updateBooksFormats(?, ?, ?, ?);';
+        await db.query(query1, [
+            data.update_book_format_id,
+            data.update_book_id,
+            data.update_format_id,
+            data.update_price
+        ]);
+
+        res.redirect('/booksformats');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the booksformats database queries.'
+        );
+    }
+});
 
 
 

@@ -17,7 +17,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <th>formatID</th>
             <th>formatCategory</th>
             <th>price</th>
-            <th>actions</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -27,20 +27,14 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         <tr>
             <td>{{this.bookFormatID}}</td>
             <td>{{this.bookID}}</td>
-            <td>{{bookTitle}}</td>
+            <td>{{this.bookTitle}}</td>
             <td>{{this.formatID}}</td>
-            <td>{{formatCategory}}</td>
+            <td>{{this.formatCategory}}</td>
             <td>{{this.price}}</td>
-
-            {{! UPDATE form }}
-            <td class="actions">
-                <form class='authorBookFormatForm' id='update_book_format_form'></form>
-                    <button type="submit">Edit</button>
-                </form>
-
+            <td>
                  {{! DELETE form }}
                 <form id='delete_books_formats_form'>
-                    <input type='hidden' name='delete_books_id' value='{{this.bookFormatID}}' />
+                    <input type='hidden' name='delete_books_formats_id' value='{{this.bookFormatID}}' />
                     <button type='submit'>
                         Delete
                     </button>
@@ -50,32 +44,43 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         {{/each}}
     </tbody>
 </table>
+
 {{! UPDATE form }}
-{{!-- placeholder update --}}
-{{!-- <h2>Update Book Formats</h2>
-<form class='books_formatsForm' id='update_books_formats_form'>
-    <label for='update_books_id'>Book to Update: </label>
-    <select name='update_books_id' id='update_books_formats_id' required>
-        <option value='' disabled selected>Select Books/Formats</option>
+<h2>Update Books Formats</h2>
+<form class='bookFormatForm' id='update_book_format_form' method='POST' action='/booksformats/update'>
+    <label for='update_book_format_id'>Book Format to Update: </label>
+    <select name='update_book_format_id' id='update_book_format_id' required>
+        <option value='' disabled selected>Select BookFormatID</option>
         {{#each booksformats}}
+        <option value='{{this.bookFormatID}}' required>
+            {{this.bookFormatID}} - Book Title: {{this.bookTitle}}, Format: {{this.formatCategory}}
+        </option>
+        {{/each}}
+    </select>
+
+    <label for='update_book_id'> Book to Update: </label>
+    <select name='update_book_id' id='update_book_id' required>
+     <option value='' disabled selected>Select Book</option>
+        {{#each books}}
         <option value='{{this.bookID}}' required>
-            {{this.bookID}} 
-        </option>
+            {{this.bookID}} - {{this.title}}
+         </option>
         {{/each}}
     </select>
 
-     <select name='update_books_formats_id' id='update_books_formats_id' required>
-        <option value='' disabled selected>Select Books/Formats</option>
-        {{#each booksformats}}
+     <label for='update_format_id'> Format to Update: </label>
+    <select name='update_format_id' id='update_format_id' required>
+     <option value='' disabled selected>Select Format</option>
+        {{#each formats}}
         <option value='{{this.formatID}}' required>
-            {{this.formatID}} 
-        </option>
+            {{this.formatID}} - {{this.category}}
+         </option>
         {{/each}}
     </select>
 
-    <label for='update_books_formats_price'>Price: </label>
-    <input type='number' name='update_books_formats_price' id='update_books_formats_price' step="0.01" />
+    <label for='update_price'> Price to Update: </label>
+    <input type='number' name='update_price' step="0.01" required/>
 
-     
-    <input type='submit' />
-</form> --}}
+
+    <button>Update</button>
+</form>
