@@ -259,6 +259,35 @@ BEGIN
 END //
 DELIMITER ;
 
+-- delete authorsbooks --
+DROP PROCEDURE IF EXISTS sp_deleteAuthorsBooks;
+
+DELIMITER //
+CREATE PROCEDURE sp_deleteAuthorsBooks(IN p_authorBookID INT)
+BEGIN
+    DECLARE error_message VARCHAR(255); 
+
+    -- account for errors
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        ROLLBACK;
+        RESIGNAL;
+    END;
+
+    START TRANSACTION;
+        DELETE FROM AuthorsBooks WHERE authorBookID = p_authorBookID;
+
+        -- check id matches, if none raise error
+        IF ROW_COUNT() = 0 THEN
+            set error_message = CONCAT('No matching record found in AuthorsBooks for id: ', p_authorBookID);
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = error_message;
+        END IF;
+
+    COMMIT;
+
+END //
+DELIMITER ;
+
 
 ----- UPDATE SECTION -----
 

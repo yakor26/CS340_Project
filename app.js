@@ -509,6 +509,29 @@ app.post('/orders/delete', async function (req, res) {
     }
 });
 
+// Authors Books Delete Section
+app.post('/authorsbooks/delete', async function (req, res) {
+    try {
+        // grab info
+        let data = req.body;
+        // call query
+        const query_del_auth_books = `CALL sp_deleteAuthorsBooks(?);`;
+        await db.query(query_del_auth_books, [data.delete_author_book_id]);
+
+        console.log(`Deleted ID: ${data.delete_author_book_id}`
+        );
+
+        // Redirect the user to the updated webpage data
+        res.redirect('/authorsbooks');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while deleting authorsbooks using database queries.'
+        );
+    }
+});
+
 
 //// ************* UPDATE SECTION ******************** ////
 // authorsbooks

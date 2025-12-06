@@ -34,7 +34,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
             <td>
                 {{! DELETE form }}
-                <form id='delete_author_books_form'>
+                <form id='delete_author_books_form' method="POST" action='/authorsbooks/delete'>
                 <input type='hidden' name='delete_author_book_id' value='{{this.authorBookID}}' />
                     <button type='submit'>
                         Delete
