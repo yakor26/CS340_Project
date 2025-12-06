@@ -19,8 +19,11 @@ const db = require('./database/db-connector');
 
 // Handlebars
 const { engine } = require('express-handlebars'); // Import express-handlebars engine
-app.engine('.hbs', engine({ extname: '.hbs' })); // Create instance of handlebars
+app.engine('.hbs', engine({ extname: '.hbs'})); // Create instance of handlebars
 app.set('view engine', '.hbs'); // Use handlebars engine for *.hbs files.
+
+
+
 
 // ########################################
 // ########## ROUTE HANDLERS
@@ -484,12 +487,13 @@ app.post('/authorsbooks/update', async function (req, res) {
     try {
         // get data from form
         const data = req.body;
+        
 
         // check valid
-        if (isNaN(parseInt(data.update_author_id)))
-            data.update_author_id = null;
-        if (isNaN(parseInt(data.update_book_id)))
-            data.update_book_id = null;
+        // if (isNaN(parseInt(data.update_author_id)))
+        //     data.update_author_id = null;
+        // if (isNaN(parseInt(data.update_book_id)))
+        //     data.update_book_id = null;
 
         const query1 = 'CALL sp_updateAuthorsBooks(?, ?, ?);';
         await db.query(query1, [
@@ -572,7 +576,18 @@ app.post('/booksformats/update', async function (req, res) {
     }
 });
 
+// Citation for use of AI Tools for edit authorsbooks:
+// Date: 12/05/2025
+// Prompts to determine how to prefill current values in edit view
+// "how can I make it so that when user selects id values are preselected to show what the current value
+//  before updating value?"
+// included snippet of code
+// adapted code
+// AI Source URL: https://copilot.microsoft.com/
 
+
+    
+ 
 
 
 

@@ -95,6 +95,23 @@ BEGIN
 END //
 DELIMITER ;
 
+-- create for AuthorsBooks
+DROP PROCEDURE IF EXISTS sp_createAuthorsBooks;
+DELIMITER //
+CREATE PROCEDURE sp_createAuthorsBooks(
+    IN p_authorID INT,
+    IN p_bookID INT,
+    OUT p_author_bookID INT
+)
+BEGIN
+    INSERT INTO AuthorsBooks(authorID, bookID)
+    VALUES(p_authorID, p_bookID);
+
+    SELECT LAST_INSERT_ID() into p_author_bookID;
+    SELECT LAST_INSERT_ID() AS new_author_book_id;
+END //
+DELIMITER ;
+
 --------- DELETE SECTION ----------
 -- delete book
 DROP PROCEDURE IF EXISTS sp_deleteBook;

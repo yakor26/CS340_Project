@@ -2,6 +2,7 @@
 Date: 11/05/2025
 Adapted from:
 Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
+<script src="/js/authorsbooksprefill.js"></script>
 
 <h1>Authors Books</h1>
 
@@ -45,14 +46,29 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 </table>
 
 {{! UPDATE form }}
+{{! dropdowns to select id want to edit, prefill, then update}}
 <h2>Update an Authors/Books</h2>
 <form class='authorBookForm' id='update_author_book_form' method='POST' action='/authorsbooks/update'>
-    <label for='update_author_book_id'>Authors/Books to Update: </label>
+    <label for='update_author_book_id'>Select Author/Book to Update: </label>
     <select name='update_author_book_id' id='update_author_book_id' required>
-        <option value='' disabled selected>Select AuthorBookID</option>
+        <option value='' disabled selected>Select Author/Book Relationship</option>
         {{#each authorsbooks}}
-        <option value='{{this.authorBookID}}' required>
+        {{!-- <option value='{{this.authorBookID}}' required>
             {{this.authorBookID}} - Author: {{this.firstName}} {{this.lastName}}, Book Title: {{this.bookTitle}}
+        </option> --}}
+        {{!-- // Citation for use of AI Tools for edit authorsbooks:
+        // Date: 12/05/2025
+        // Prompts to determine how to prefill current values in dropdowns
+        // "how can I make it so that when user selects id values are preselected to show what the current value
+        //  before updating value?"
+        // included snippet of code
+        // adapted code
+        // AI Source URL: https://copilot.microsoft.com/ --}}
+        <option 
+            value="{{this.authorBookID}}"
+            data-author="{{this.authorID}}"
+            data-book="{{this.bookID}}">
+            {{this.authorBookID}} — {{this.firstName}} {{this.lastName}} / {{this.bookTitle}}
         </option>
         {{/each}}
     </select>
@@ -77,8 +93,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         {{/each}}
     </select>
 
-
-    <button>Update</button>
+<button>Update</button>
 </form>
+
+
+
 
      
