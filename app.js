@@ -487,13 +487,13 @@ app.post('/authorsbooks/update', async function (req, res) {
     try {
         // get data from form
         const data = req.body;
-        
+        console.log("UPDATE BODY:", req.body);
 
         // check valid
-        // if (isNaN(parseInt(data.update_author_id)))
-        //     data.update_author_id = null;
-        // if (isNaN(parseInt(data.update_book_id)))
-        //     data.update_book_id = null;
+        if (isNaN(parseInt(data.update_author_id)))
+            data.update_author_id = null;
+        if (isNaN(parseInt(data.update_book_id)))
+            data.update_book_id = null;
 
         const query1 = 'CALL sp_updateAuthorsBooks(?, ?, ?);';
         await db.query(query1, [

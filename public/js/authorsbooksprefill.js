@@ -7,18 +7,30 @@
     // adapted code
     // AI Source URL: https://copilot.microsoft.com/
 
-    document.addEventListener("DOMContentLoaded", () => {
+ document.addEventListener("DOMContentLoaded", () => {
     const select = document.getElementById("update_author_book_id");
     const authorDropdown = document.getElementById("update_author_id");
     const bookDropdown = document.getElementById("update_book_id");
 
-    select.addEventListener("change", () => {
+    if (!select || !authorDropdown || !bookDropdown) {
+        console.warn("Prefill script: missing elements.");
+        return;
+    }
+
+    function prefill() {
         const option = select.options[select.selectedIndex];
+        if (!option) return;
 
         const authorID = option.getAttribute("data-author");
         const bookID = option.getAttribute("data-book");
 
-        authorDropdown.value = authorID;
-        bookDropdown.value = bookID;
-    });
+        if (authorID) authorDropdown.value = authorID;
+        if (bookID) bookDropdown.value = bookID;
+    }
+
+    // prefill immediately
+    prefill();
+
+    select.addEventListener("change", prefill);
 });
+
