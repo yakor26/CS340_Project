@@ -46,6 +46,33 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     </tbody>
 </table>
 
+{{! CREATE form }}
+<h2>Create an Author Book Relationship</h2>
+<form class='authorBookForm' id='create_author_book_form' method='POST' action='/authorsbooks/create'>
+    <label for='create_author_id'> Author: </label>
+    <select name='create_author_id' id='create_author_id' required>
+     <option value='' disabled selected>Select Author</option>
+        {{#each authors}}
+        <option value='{{this.authorID}}' required>
+            {{this.authorID}} - {{this.firstName}} {{this.lastName}}
+         </option>
+        {{/each}}
+    </select>
+
+    <label for='create_book_id'> Book: </label>
+    <select name='create_book_id' id='create_book_id' required>
+     <option value='' disabled selected>Select Book</option>
+        {{#each books}}
+        <option value='{{this.bookID}}' required>
+            {{this.bookID}} - {{this.title}}
+         </option>
+        {{/each}}
+    </select>
+
+    
+    <button type="submit">Submit</button>
+</form>
+
 {{! UPDATE form }}
 {{! dropdowns to select id want to edit, prefill, then update}}
 <h2>Update an Authors/Books</h2>

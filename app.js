@@ -363,6 +363,35 @@ app.post('/orders/create', async function (req, res) {
     }
 });
 
+/// 
+// create route for AuthorsBooks
+app.post('/authorsbooks/create', async function (req, res) {
+    try {
+        // grab info from form
+        let data = req.body;
+
+        // call query
+        const query = `CALL sp_createAuthorsBooks(?, ?, @new_author_book_id);`;
+
+        // 
+        const [[[rows]]] = await db.query(query, [
+            data.create_author_id,
+            data.create_book_id
+        ]);
+
+        console.log(`Successfully Created AuthorsBooks ID: ${rows.new_author_book_id} `);
+
+        // Redirect back to orders
+        res.redirect('/authorsbooks');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while executing adding to authorsbooks database queries.'
+        );
+    }
+});
+
 
 //// ******************* DELETE SECTION ******************* ////
 
