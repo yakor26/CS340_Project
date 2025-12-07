@@ -290,6 +290,23 @@ DELIMITER ;
 
 
 ----- UPDATE SECTION -----
+------- Update Books --------
+DROP PROCEDURE IF EXISTS sp_updateBooks;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateBooks(
+    IN p_bookID INT,
+    IN p_title VARCHAR(100),
+    IN p_pageCount INT,
+    IN p_publishDate DATE,
+    IN p_advanceAmount DECIMAL(8,2)
+    )
+
+BEGIN
+    UPDATE Books SET title = p_title, pageCount = p_pageCount, publishDate = p_publishDate, advanceAmount = p_advanceAmount 
+    WHERE bookID = p_bookID; 
+END //
+DELIMITER ;
 
 ---- Update AuthorsBooks
 DROP PROCEDURE IF EXISTS sp_updateAuthorsBooks;

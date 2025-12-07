@@ -43,7 +43,9 @@ app.get('/', async function (req, res) {
 app.get('/books', async function (req, res) {
     try {
         // query
-        const query1 = 'SELECT * FROM Books';
+        // added date format to convert for js to recognize
+        const query1 = `SELECT bookID, title, pageCount, DATE_FORMAT(publishDate, '%Y-%m-%d') AS publishDate, advanceAmount
+                        FROM Books`;
         // query to database
         const [books] = await db.query(query1);
         res.render('books', { books: books });
@@ -534,12 +536,44 @@ app.post('/authorsbooks/delete', async function (req, res) {
 
 
 //// ************* UPDATE SECTION ******************** ////
+// update books
+app.post('/books/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        // check valid value entered 
+        if (isNaN(parseInt(data.update_book_page_count))) {
+            data.update_book_page_count = null;
+        }
+        if (isNaN(parseFloat(data.update_book_advance_amount))) {
+            data.update_book_advance_amount = null;
+        }
+
+        const query1 = 'CALL sp_updateBooks(?, ?, ?, ?, ?);';
+        await db.query(query1, [
+            data.update_book_id,
+            data.update_book_title,
+            data.update_book_page_count,
+            data.update_book_publish_date,
+            data.update_book_advance_amount
+        ]);
+
+        res.redirect('/books');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the books database queries.'
+        );
+    }
+});
+
 // authorsbooks
 app.post('/authorsbooks/update', async function (req, res) {
     try {
         // get data from form
         const data = req.body;
-        console.log("UPDATE BODY:", req.body);
 
         // check valid
         if (isNaN(parseInt(data.update_author_id)))

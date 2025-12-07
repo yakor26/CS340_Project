@@ -2,7 +2,7 @@
 Date: 11/05/2025
 Adapted from:
 Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
-
+<script src="/js/booksprefill.js"></script>
 <h1>Books</h1>
 
 {{! READ table }}
@@ -64,12 +64,17 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 
 <h2>Update a Book</h2>
-<form class='bookForm' id='update_book_form'>
+<form class='bookForm' id='update_book_form' method="POST" action="/books/update">
     <label for='update_book_id'>Book to Update: </label>
     <select name='update_book_id' id='update_book_id' required>
         <option value='' disabled selected>Select a Book</option>
         {{#each books}}
-        <option value='{{this.bookID}}' required>
+        <option value='{{this.bookID}}' required
+        data-book-title = '{{this.title}}'
+        data-book-page = '{{this.pageCount}}'
+        data-book-publishdate = '{{this.publishDate}}'
+        data-book-advanceamount = '{{this.advanceAmount}}'
+        >
             {{this.bookID}}
             -
             {{this.title}}
@@ -78,18 +83,16 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     </select>
     {{!-- work on prefilling existing info to edit --}}
     <label for='update_book_title'>Title: </label>
-    <input type='text' name='update_book_title' id='update_book_title' />
+    <input type='text' name='update_book_title' id='update_book_title' required/>
 
     <label for='update_book_page_count'>Page Count: </label>
-    <input type='number' name='update_book_page_count' id='update_book_page_count' />
+    <input type='number' name='update_book_page_count' id='update_book_page_count'/>
 
     <label for='update_book_publish_date'>Publish Date: </label>
-    <input type='date' name='update_book_publish_date' id='update_book_publish_date' />
+    <input type='date' name='update_book_publish_date' id='update_book_publish_date' required/>
 
     <label for='update_book_advance_amount'>Advance Amount: </label>
-    <input type='number' name='update_book_advance_amount' id='update_book_advance_amount' step='0.01' />
+    <input type='number' name='update_book_advance_amount' id='update_book_advance_amount' step='0.01' required/>
 
-    
-     
-    <input type='submit' />
+    <button>Update</button>
 </form>
