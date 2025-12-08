@@ -342,6 +342,22 @@ BEGIN
 END //
 DELIMITER ;
 
+-------- Update Formats ----------
+DROP PROCEDURE IF EXISTS sp_updateFormats;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateFormats(
+    IN p_formatID INT,
+    IN p_category VARCHAR(50),
+    IN p_royaltyPercentage DECIMAL(5,2)
+    )
+
+BEGIN
+    UPDATE Formats SET category = p_category, royaltyPercentage = p_royaltyPercentage
+    WHERE formatID = p_formatID; 
+END //
+DELIMITER ;
+
 ---- Update AuthorsBooks
 DROP PROCEDURE IF EXISTS sp_updateAuthorsBooks;
 

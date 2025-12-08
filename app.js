@@ -616,6 +616,29 @@ app.post('/buyers/update', async function (req, res) {
     }
 });
 
+// Formats update
+app.post('/formats/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        const query1 = 'CALL sp_updateFormats(?, ?, ?);';
+        await db.query(query1, [
+            data.update_format_id,
+            data.update_format_category,
+            data.update_format_royalty_percentage
+        ]);
+
+        res.redirect('/formats');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the formats database queries.'
+        );
+    }
+});
+
 // authorsbooks
 app.post('/authorsbooks/update', async function (req, res) {
     try {

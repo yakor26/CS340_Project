@@ -55,7 +55,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! UPDATE form }}
 <h2>Update a Format</h2>
-<form class='formatForm' id='update_format_form'>
+<form class='formatForm' id='update_format_form' method="POST" action='/formats/update'>
     <label for='update_format_id'>Format to Update: </label>
     <select name='update_format_id' id='update_format_id' required>
         <option value='' disabled selected>Select a Format</option>
@@ -71,10 +71,10 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     {{!do not want changes to category, set only allow changes to percentages}}
 
     <label for='update_format_category'>Category: </label>
-    <input type='text' name='update_format_category' id='update_format_category'/>
+    <input type='text' name='update_format_category' id='update_format_category' required/>
 
     <label for='update_format_royalty_percentage'>Royalty Percentage: </label>
-    <input type='number' name='update_format_royalty_percentage' id='update_format_royalty_percentage' step="0.01"/>
+    <input type='number' name='update_format_royalty_percentage' id='update_format_royalty_percentage' step="0.01" required/>
      
     <input type='submit' />
 </form>
