@@ -45,21 +45,11 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 <h2>Create a Format</h2>
 <form class='formatForm' id='create_format_form' method="POST" action='/formats/create'>
     <label for='create_format_category'>Category: </label>
-    <select name='create_format_category' id='create_format_category' required>
-        <option value='Paperback' selected>Paperback</option>
-        <option value='Hardcover'>Hardcover</option>
-        <option value='Ebook'>Ebook</option>
-        <option value='Audiobook'>Audiobook</option>
-    </select>
+    <input type='text' name='create_format_category' id='create_format_category'required />
+
     <label for='create_format_royalty_percentage'>Royalty Percentage: </label>
-     <select name='create_format_royalty_percentage' id='create_format_royalty_percentage' required>
-        <option value='7.50' selected>7.50%</option>
-        <option value='12.25'>12.25%</option>
-        <option value='20.50'>20.50%</option>
-        <option value='15.00'>15.00%</option>
-
-    </select>
-
+     <input type='number' name='create_format_royalty_percentage' id='create_format_royalty_percentage' step='0.01' required>
+     
     <input type='submit' />
 </form>
 
