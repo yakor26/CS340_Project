@@ -63,7 +63,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! UPDATE form }}
 <h2>Update a Buyer</h2>
-<form class='buyerForm' id='update_buyer_form'>
+<form class='buyerForm' id='update_buyer_form' method="POST" action='/buyers/update'>
     <label for='update_buyer_id'>Buyer to Update: </label>
     <select name='update_buyer_id' id='update_buyer_id' required>
         <option value='' disabled selected>Select a Buyer</option>
@@ -77,13 +77,13 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
         {{/each}}
     </select>
     <label for='update_buyer_name'>Buyer Name: </label>
-    <input type='text' name='update_buyer_name' id='update_buyer_name' />
+    <input type='text' name='update_buyer_name' id='update_buyer_name' required/>
 
     <label for='update_buyer_email'>Email: </label>
-    <input type='text' name='update_buyer_email' id='update_buyer_email' />
+    <input type='text' name='update_buyer_email' id='update_buyer_email' required/>
 
     <label for='update_buyer_organization_buyer'>Organization Buyer: </label>
-     <select name='update_buyer_organization_buyer' id='update_buyer_organization_buyer'>
+     <select name='update_buyer_organization_buyer' id='update_buyer_organization_buyer' required>
         <option value='true' selected>True</option>
         <option value='false'>False</option>
     </select>
@@ -91,5 +91,5 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
     
      
-    <input type='submit' />
+    <button>Submit</button>
 </form>
