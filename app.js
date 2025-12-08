@@ -568,6 +568,53 @@ app.post('/books/update', async function (req, res) {
         );
     }
 });
+// Authors update
+app.post('/authors/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        const query1 = 'CALL sp_updateAuthors(?, ?, ?, ?);';
+        await db.query(query1, [
+            data.update_author_id,
+            data.update_author_first_name,
+            data.update_author_last_name,
+            data.update_author_email
+        ]);
+
+        res.redirect('/authors');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the authors database queries.'
+        );
+    }
+});
+
+// Buyers update
+app.post('/buyers/update', async function (req, res) {
+    try {
+        // get data from form
+        const data = req.body;
+
+        const query1 = 'CALL sp_updateBuyers(?, ?, ?, ?);';
+        await db.query(query1, [
+            data.update_buyer_id,
+            data.update_buyer_name,
+            data.update_buyer_email,
+            data.update_buyer_organization_buyer
+        ]);
+
+        res.redirect('/buyers');
+    } catch (error) {
+        console.error('Error executing queries:', error);
+        // Send a generic error message to the browser
+        res.status(500).send(
+            'An error occurred while updating the buyers database queries.'
+        );
+    }
+});
 
 // authorsbooks
 app.post('/authorsbooks/update', async function (req, res) {
@@ -687,6 +734,8 @@ app.post('/reset', async function (req, res) {
 
         // Redirect the user to the updated webpage data
         res.redirect('/');
+        
+
     } catch (error) {
         console.error('Error executing queries:', error);
         // Send a generic error message to the browser

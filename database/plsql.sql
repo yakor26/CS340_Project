@@ -308,6 +308,40 @@ BEGIN
 END //
 DELIMITER ;
 
+------- Update Authors --------
+DROP PROCEDURE IF EXISTS sp_updateAuthors;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateAuthors(
+    IN p_authorID INT,
+    IN p_firstName VARCHAR(50),
+    IN p_lastName VARCHAR(50),
+    IN p_email VARCHAR(100)
+    )
+
+BEGIN
+    UPDATE Authors SET firstName = p_firstName, lastName = p_lastName, email = p_email
+    WHERE authorID = p_authorID; 
+END //
+DELIMITER ;
+
+-------- Update Buyers ----------
+DROP PROCEDURE IF EXISTS sp_updateBuyers;
+
+DELIMITER //
+CREATE PROCEDURE sp_updateBuyers(
+    IN p_buyerID INT,
+    IN p_name VARCHAR(100),
+    IN p_email VARCHAR(100),
+    IN p_organizationBuyer TINYINT(1)
+    )
+
+BEGIN
+    UPDATE Buyers SET name = p_name, email = p_email, organizationBuyer = p_organizationBuyer
+    WHERE buyerID = p_buyerID; 
+END //
+DELIMITER ;
+
 ---- Update AuthorsBooks
 DROP PROCEDURE IF EXISTS sp_updateAuthorsBooks;
 
