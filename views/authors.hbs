@@ -61,7 +61,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! UPDATE form }}
 <h2>Update an Author</h2>
-<form class='authorForm' id='update_author_form'>
+<form class='authorForm' id='update_author_form' method="POST" action='/authors/update'>
     <label for='update_author_id'>Author to Update: </label>
     <select name='update_author_id' id='update_author_id' required>
         <option value='' disabled selected>Select an Author</option>
@@ -76,13 +76,13 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     </select>
     {{!-- work on prefilling existing info to edit --}}
     <label for='update_author_first_name'>First Name: </label>
-    <input type='text' name='update_author_first_name' id='update_author_first_name' />
+    <input type='text' name='update_author_first_name' id='update_author_first_name' required/>
 
     <label for='update_author_last_name'>Last Name: </label>
-    <input type='text' name='update_author_last_name' id='update_author_last_name' />
+    <input type='text' name='update_author_last_name' id='update_author_last_name' required />
 
     <label for='update_author_email'>Email: </label>
-    <input type='text' name='update_author_email' id='update_author_email' />
+    <input type='text' name='update_author_email' id='update_author_email' required />
      
     <input type='submit' />
 </form>
