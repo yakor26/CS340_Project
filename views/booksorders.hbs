@@ -16,7 +16,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <th>bookID</th>
             <th>bookTitle</th>
             <th>quantity</th>
-            <th></th>
+            {{!-- <th></th> --}}
         </tr>
     </thead>
 
@@ -31,7 +31,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
             <td>{{bookTitle}}</td>
             <td>{{this.quantity}}</td>
 
-            <td>
+            {{!-- <td>
                 {{! DELETE form }}
                 <form id='delete_books_orders_form'>
                     <input type='hidden' name='delete_book_order_id' value='{{this.bookOrderID}}' />
@@ -39,7 +39,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
                         Delete
                     </button>
                 </form>
-            </td>
+            </td> --}}
         </tr>
         {{/each}}
     </tbody>
