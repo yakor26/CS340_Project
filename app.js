@@ -190,8 +190,8 @@ app.get('/booksformats', async function (req, res) {
                         JOIN Formats ON Formats.formatID = BooksFormats.formatID
                         ORDER BY bookFormatID`;
         const query9 = 'SELECT bookID, title FROM Books';
-        const query10 = 'SELECT bookID, title FROM Formats';
-        const [formats] = await db.query(query9);
+        const query10 = 'SELECT formatID, category FROM Formats';
+        const [formats] = await db.query(query10);
         const [books] = await db.query(query9);
         const [booksformats] = await db.query(query8);
         
@@ -732,14 +732,7 @@ app.post('/booksformats/update', async function (req, res) {
     }
 });
 
-// Citation for use of AI Tools for edit authorsbooks:
-// Date: 12/05/2025
-// Prompts to determine how to prefill current values in edit view
-// "how can I make it so that when user selects id values are preselected to show what the current value
-//  before updating value?"
-// included snippet of code
-// adapted code
-// AI Source URL: https://copilot.microsoft.com/
+
 
 
     

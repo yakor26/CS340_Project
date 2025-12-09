@@ -19,7 +19,7 @@
     }
 
     function prefill() {
-        // get data from select/options
+        // get data from select/options, exit if nothing selected
         const option = select.options[select.selectedIndex];
         if (!option) return;
 
@@ -33,6 +33,7 @@
     // prefill immediately
     prefill();
 
+    // function called whenever new call selected on dropdown
     select.addEventListener("change", prefill);
 });
 
