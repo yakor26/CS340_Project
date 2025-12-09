@@ -57,7 +57,7 @@ nav a {
 
 }
 
-nav a:hover {
+nav a:hover, .resetbtn:hover {
     background-color: #B6B6D6;
 }
 
@@ -72,9 +72,10 @@ margin-left: -8px;
 width: 150px;
 height: 60px;
 margin-top: 50px;
-background-color: #588C87;
+background-color: #FFE5B4;
 font-size: 16px;
-color: white;
+color: #272757;
+font-weight: bolder;
 }
 
 form {
@@ -114,6 +115,15 @@ input, select {
 label {
     display: block;
     margin-bottom: 8px;
+}
+
+nav img {
+    padding-bottom: 25px;
+    width: 50px;
+}
+
+.moon-icons {
+    text-align: left;
 }
 
 
