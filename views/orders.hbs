@@ -2,7 +2,6 @@
 Date: 11/05/2025
 Adapted from:
 Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web-application-technology-2?module_item_id=25645131 --}}
-
 <h1>Orders</h1>
 
 {{! READ table }}
@@ -49,6 +48,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 4      # "I have a fk buyer id, would I allow it to be manually entered?"
        # included snippet of code
 7      # AI Source URL: https://copilot.microsoft.com/ --}}
+
 <h2>Create an Order</h2>
 <form class='orderForm' id='create_order_form' method= "POST" action='/orders/create'>
     {{!reference all available buyers to select from}}
@@ -68,6 +68,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     <input type='date' name='create_order_date' id='create_order_date'required/>
     <button type="submit">Submit</button>
 </form>
+
 
 {{! UPDATE form }}
 <h2>Update an Order</h2>
@@ -94,5 +95,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     <label for='update_order_date'>Order Date: </label>
     <input type='date' name='update_order_date' id='update_order_date' />
      
-    <input type='submit' />
+    <button>Submit</button>
 </form>
+
+<script src="/js/modal.js"></script>

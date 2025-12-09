@@ -12,12 +12,14 @@
     const authorDropdown = document.getElementById("update_author_id");
     const bookDropdown = document.getElementById("update_book_id");
 
+    // check selection provided
     if (!select || !authorDropdown || !bookDropdown) {
         console.warn("Prefill script: missing elements.");
         return;
     }
 
     function prefill() {
+        // get data from select/options
         const option = select.options[select.selectedIndex];
         if (!option) return;
 

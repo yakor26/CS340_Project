@@ -46,6 +46,7 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
 
 {{! CREATE form }}
 <h2>Create an Author</h2>
+
 <form class='authorForm' id='create_author_form' method="POST" action= '/authors/create'>
     <label for='create_author_fname'>First Name: </label>
     <input type='text' name='create_author_fname' id='create_author_fname' required />
@@ -84,5 +85,5 @@ Source URL: https://canvas.oregonstate.edu/courses/2017561/pages/exploration-web
     <label for='update_author_email'>Email: </label>
     <input type='text' name='update_author_email' id='update_author_email' required />
      
-    <input type='submit' />
+    <button>Submit</button>
 </form>
